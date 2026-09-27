@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Miami Bro's</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    
+    <!-- Tailwind CSS (CDN for development) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind-config.js"></script>
+</head>
+<body class="bg-background min-h-screen flex hidden" id="app-body">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-surface-container-lowest border-r border-surface-container flex flex-col hidden md:flex">
+        <div class="p-6 flex items-center gap-3 border-b border-surface-container">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-md">
+                <img src="../assets/logo.png" alt="Logo" class="w-8 h-8 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'">
+            </div>
+            <h2 class="font-display-sm font-black text-xl text-on-surface">Admin</h2>
+        </div>
+        <nav class="flex-1 p-4 space-y-2">
+            <a href="#" class="flex items-center gap-3 bg-secondary-container text-on-secondary-container px-4 py-3 rounded-xl font-label-md font-bold transition-colors">
+                <span class="material-symbols-outlined">inventory_2</span>
+                Productos
+            </a>
+            <!-- Más opciones futuras aquí -->
+        </nav>
+        <div class="p-4 border-t border-surface-container">
+            <button id="logout-btn" class="w-full flex items-center justify-center gap-2 text-error hover:bg-error-container/50 px-4 py-3 rounded-xl font-label-md font-bold transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+                Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- Topbar Mobile -->
+        <header class="md:hidden bg-surface-container-lowest border-b border-surface-container p-4 flex justify-between items-center">
+            <h2 class="font-display-sm font-black text-xl text-on-surface">Miami Bro's</h2>
+            <button id="logout-btn-mobile" class="text-error">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="font-display-md text-3xl font-black text-on-surface">Gestión de Menú</h1>
+                    <p class="text-on-surface-variant font-body-md mt-1">Administra tus productos y precios en tiempo real.</p>
+                </div>
+                <button class="bg-primary hover:bg-surface-tint text-white px-6 py-3 rounded-xl font-label-lg font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined">add</span>
+                    Nuevo Producto
+                </button>
+            </div>
+
+            <!-- Tabla Placeholder -->
+            <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-10 text-center">
+                <span class="material-symbols-outlined text-6xl text-surface-container-high mb-4">construction</span>
+                <h3 class="font-headline-sm font-bold text-on-surface">Próximamente...</h3>
+                <p class="text-on-surface-variant mt-2 max-w-md mx-auto">Aquí construiremos la tabla dinámica con tus productos directamente desde Firestore.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Guard Script (Shows body only if logged in) -->
+    <script type="module" src="../js/auth.js"></script>
+    <script>
+        // Prevent flashing content before auth state is known
+        import('../js/firebase.js').then((firebaseMod) => {
+            import('https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js').then((authMod) => {
+                authMod.onAuthStateChanged(firebaseMod.auth, (user) => {
+                    if (user) {
+                        document.getElementById('app-body').classList.remove('hidden');
+                    }
+                });
+            });
+        });
+
+        // Handle mobile logout
+        document.getElementById('logout-btn-mobile')?.addEventListener('click', () => {
+            document.getElementById('logout-btn')?.click();
+        });
+    </script>
+</body>
+</html>

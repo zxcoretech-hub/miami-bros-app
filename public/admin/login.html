@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Miami Bro's</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    
+    <!-- Tailwind CSS (CDN for development) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind-config.js"></script>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center p-4">
+
+    <!-- Login Container -->
+    <div class="bg-surface-container-lowest rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-full max-w-md overflow-hidden border border-surface-container">
+        
+        <!-- Header Section -->
+        <div class="bg-primary px-8 py-10 text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <img src="../assets/logo.png" alt="Miami Bro's Logo" class="w-16 h-16 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'">
+                </div>
+                <h1 class="font-display-md text-white font-black text-2xl tracking-tight">Miami Bro's Admin</h1>
+                <p class="text-primary-fixed mt-2 font-body-md">Ingresa tus credenciales para continuar</p>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="p-8">
+            <form id="login-form" class="space-y-6">
+                <!-- Error Message Alert -->
+                <div id="error-message" class="hidden bg-error-container text-on-error-container px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2">
+                    <span class="material-symbols-outlined text-error">error</span>
+                    <span id="error-text">Credenciales incorrectas.</span>
+                </div>
+
+                <div>
+                    <label for="email" class="block font-label-md text-on-surface-variant mb-2">Correo Electrónico</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">mail</span>
+                        <input type="email" id="email" required placeholder="admin@miamibros.com"
+                            class="w-full bg-surface-container-low border border-surface-container outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl py-3 pl-12 pr-4 text-on-surface transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block font-label-md text-on-surface-variant mb-2">Contraseña</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">lock</span>
+                        <input type="password" id="password" required placeholder="••••••••"
+                            class="w-full bg-surface-container-low border border-surface-container outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl py-3 pl-12 pr-4 text-on-surface transition-all">
+                    </div>
+                </div>
+
+                <button type="submit" id="login-btn"
+                    class="w-full bg-primary hover:bg-surface-tint text-white font-label-lg font-bold py-4 rounded-xl shadow-md transition-transform transform hover:scale-[1.02] flex justify-center items-center gap-2">
+                    <span class="material-symbols-outlined">login</span>
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Auth Script -->
+    <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

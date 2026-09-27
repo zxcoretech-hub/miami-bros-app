@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Migrar Datos a Firebase</title>
+</head>
+<body>
+  <h1>Migrando productos a Firestore...</h1>
+  <p id="status">Por favor espera...</p>
+
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      document.getElementById("status").innerText = "Error crítico: " + message;
+    };
+  </script>
+  <script src="js/data.js"></script>
+  <script type="module">
+    import { db } from './js/firebase.js';
+    import { collection, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+    async function migrarDatos() {
+      const status = document.getElementById("status");
+      try {
+        const productos = window.MiamiBros.menuItems;
+        for (let item of productos) {
+          // Map properties to spanish as requested in the plan
+          const prodData = {
+            titulo: item.title,
+            descripcion: item.description,
+            precio: item.price,
+            precioStr: item.priceStr,
+            insignia: item.badge,
+            insignia_color: item.badgeClass,
+            imagen_url: item.image,
+            mensaje_wa: item.waMessage,
+            orden: item.id,
+            activo: true
+          };
+          
+          // Use id as document id for easier referencing, padded to ensure ordering
+          const docId = 'prod-' + String(item.id).padStart(3, '0');
+          await setDoc(doc(db, "productos", docId), prodData);
+          console.log("Migrado: " + prodData.titulo);
+        }
+        status.innerText = "¡Migración completada exitosamente! Puedes cerrar esta pestaña.";
+      } catch (error) {
+        console.error("Error al migrar:", error);
+        status.innerText = "Error: " + error.message;
+      }
+    }
+
+    migrarDatos();
+  </script>
+</body>
+</html>
