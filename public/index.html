@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="es" style="">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d6e3ff",
+                        "on-tertiary-fixed": "#001b3d",
+                        "surface-container-low": "#f6f3f2",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "on-secondary-container": "#6b4b00",
+                        "on-secondary-fixed": "#271900",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffba20",
+                        "inverse-on-surface": "#f3f0ef",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        error: "#ba1a1a",
+                        "primary-container": "#e51a24",
+                        "surface-container": "#f0eded",
+                        outline: "#926e6b",
+                        "surface-tint": "#c00016",
+                        "on-primary-fixed-variant": "#93000e",
+                        tertiary: "#0d5baf",
+                        "secondary-container": "#feb700",
+                        "secondary-fixed": "#ffdea8",
+                        "on-tertiary-fixed-variant": "#00468c",
+                        "inverse-primary": "#ffb4ac",
+                        "on-primary": "#ffffff",
+                        background: "#fcf9f8",
+                        "tertiary-container": "#3674ca",
+                        primary: "#bb0015",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#a9c7ff",
+                        "inverse-surface": "#313030",
+                        "outline-variant": "#e7bcb8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#fdfbff",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1c1b1b",
+                        "surface-bright": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface": "#1c1b1b",
+                        surface: "#fcf9f8",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        secondary: "#7c5800",
+                        "on-primary-fixed": "#410003",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#5d3f3c",
+                        "surface-container-high": "#eae7e7",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px",
+                    },
+                    spacing: {
+                        "margin-mobile": "1rem",
+                        "gutter-mobile": "0.75rem",
+                        gutter: "1.25rem",
+                        "space-xl": "2.5rem",
+                        "space-md": "1rem",
+                        "space-lg": "1.5rem",
+                        "space-sm": "0.5rem",
+                        margin: "2rem",
+                        "space-xs": "0.25rem",
+                    },
+                    fontFamily: {
+                        "headline-sm": ["Epilogue"],
+                        "headline-lg": ["Epilogue"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Epilogue"],
+                        "display-lg": ["Epilogue"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-md-mobile": ["Epilogue"],
+                        "display-md": ["Epilogue"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Epilogue"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                    },
+                    fontSize: {
+                        "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "700" }],
+                        "headline-lg": [
+                            "32px",
+                            { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800" },
+                        ],
+                        "label-md": [
+                            "14px",
+                            { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "700" },
+                        ],
+                        "headline-md": [
+                            "24px",
+                            { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" },
+                        ],
+                        "display-lg": [
+                            "56px",
+                            { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "900" },
+                        ],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "display-md-mobile": [
+                            "30px",
+                            { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "800" },
+                        ],
+                        "display-md": [
+                            "44px",
+                            { lineHeight: "52px", letterSpacing: "-0.02em", fontWeight: "800" },
+                        ],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": [
+                            "12px",
+                            { lineHeight: "16px", letterSpacing: "0.03em", fontWeight: "700" },
+                        ],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "display-lg-mobile": [
+                            "36px",
+                            { lineHeight: "42px", letterSpacing: "-0.02em", fontWeight: "900" },
+                        ],
+                        "label-lg": [
+                            "16px",
+                            { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "700" },
+                        ],
+                    },
+                },
+            },
+        };
+
+    </script>
+</head>
+
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-container selection:text-white">
+    <header
+        class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-md border-b border-surface-container-high">
+        <div class="bg-primary text-on-primary py-space-xs px-margin text-center overflow-hidden">
+            <p class="font-label-sm text-label-sm tracking-wide flex items-center justify-center gap-space-xs">
+                <span class="flex items-center gap-1.5 font-bold">🇵🇦 ¡YA ABRIMOS EN PANAMÁ! • 🇨🇴 Auténtico Sabor y
+                    Sazón 100%
+                    Colombiano • Domicilios y Salón 🛵</span>
+            </p>
+        </div>
+        <div class="h-20 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md">
+            <div class="flex items-center gap-space-sm">
+                <img alt="Miami Bro's Pollo Apanado Logo"
+                    class="w-12 h-12 rounded-full object-cover shadow-[0_2px_8px_rgba(187,0,21,0.25)] border-2 border-primary"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuASWMECjQIqJrFT2Vq84q-3CK07-AKJaTWFJFyaQaqiwB_rnZYDQijyulnOT32vdm5uYlka7463Pm_Ko_Ve4WcgOxpDLWA186NcufbE_VOwkVRaSFrCdek_r-WkvE4A1h92ZYsQ8JAmaKdHKoW56c11HBgqc2-iumDYiV1Ni_M6jd2c5sr9C7xm4bSNZEgkcUgWMXRAf0H7Rp76Bha6ePHd6mA75--1RrrlCT-WAH58HO0h3o5YNjogBxepvuC-P3Aedyg" />
+                <div>
+                    <a class="font-headline-sm text-headline-sm text-primary tracking-tight block leading-none font-black"
+                        href="#">Miami Bro's</a>
+                    <span
+                        class="font-label-sm text-[11px] text-primary font-bold block mt-1 tracking-wider uppercase leading-none">POLLO
+                        APANADO &amp; SABOR LEGENDARIO</span>
+                </div>
+            </div>
+            <nav class="hidden xl:flex items-center gap-space-sm">
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#menu">El Menú</a>
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#combos">Combos Bro's</a>
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#secretos">Nuestros Secretos</a>
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#locales">Locales &amp; Horarios</a>
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#opiniones">Opiniones</a>
+                <a class="font-label-md text-label-md px-space-sm py-space-xs text-on-surface-variant hover:text-primary transition-colors font-bold"
+                    href="#contacto">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-space-sm">
+                <a class="hidden sm:inline-flex items-center justify-center gap-1.5 font-label-md text-label-md bg-[#25D366] text-white hover:bg-[#20ba59] px-space-md py-space-xs rounded-full shadow-[0_3px_0px_#128c46] active:translate-y-0.5 transition-all font-bold"
+                    href="https://wa.me/?text=Hola%20Miami%20Bros!%20Quiero%20hacer%20un%20pedido%20ahora"
+                    target="_blank">
+                    <span class="material-symbols-outlined text-base">chat</span> Pide
+                    por WhatsApp</a>
+                <a class="inline-flex items-center justify-center font-label-md text-label-md bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary px-space-md py-space-xs rounded-full shadow-[0_3px_0px_rgba(65,0,3,0.8)] active:translate-y-0.5 transition-all font-bold"
+                    href="#menu">Ver Menú Online</a>
+            </div>
+        </div>
+    </header>
+    <main class="w-full pt-28 bg-background">
+        <div class="flex flex-col w-full overflow-hidden">
+            <div
+                class="bg-primary text-on-primary py-2.5 px-4 overflow-hidden relative shadow-sm border-t border-b border-primary-container">
+                <div
+                    class="flex items-center justify-between max-w-7xl mx-auto text-xs sm:text-sm font-label-md tracking-wider uppercase">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping">
+                        </span>
+                        <span class="font-black text-secondary-fixed">🇵🇦 ¡EL MEJOR POLLO LLEGÓ A PANAMÁ!</span>
+                        <span class="hidden md:inline text-on-primary/90 font-medium">Receta Secreta Colombiana de Doble
+                            Apanado Crujiente</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span
+                            class="bg-surface-container-lowest/20 px-3 py-0.5 rounded-full text-white font-bold flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            Entrega Rápida Panamá</span>
+                        <span class="hidden lg:inline text-secondary-fixed font-black">🔥 DOMICILIOS &amp; SALÓN</span>
+                    </div>
+                </div>
+            </div>
+            <section
+                class="w-full bg-gradient-to-b from-[#e51a24] to-[#bb0015] text-white pt-10 pb-16 relative overflow-hidden shadow-xl"
+                id="hero">
+                <div
+                    class="absolute -left-10 md:left-1/4 top-1/2 -translate-y-1/2 w-[420px] sm:w-[560px] lg:w-[680px] aspect-square rounded-full pointer-events-none opacity-10 select-none overflow-hidden blur-[0.5px]">
+                    <img alt="Miami Bro's Mascot Watermark" class="w-full h-full object-cover scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnWR-1RxqoBefRL8AtoPuEcljBu5hw1x0cOb95yCquKJuIvuodAvwKv5HXjgyU9H6r2Y2iGcAOvF4MfyXg4l8QOTqeTEJF2a33WG9-NHsu2rPthspJmF4eKpTp-O2mYTDMZAcGNfNDjnXqH-GXBGiARhVPKVYdKDXydlonR_QT4zgPoyh6MoA5LinyyTOkQ79VVuEKU-mDGoRYwwCYs93rryAEwlit7kV4AfgIOWT207ZBppjWsmMvZ66_wHvfW0wnuH0" />
+                </div>
+                <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-white/5 pointer-events-none blur-2xl">
+                </div>
+                <div class="absolute -left-20 bottom-0 w-80 h-80 rounded-full bg-black/10 pointer-events-none blur-xl">
+                </div>
+                <div class="max-w-7xl mx-auto px-margin relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-6 space-y-5 text-left">
+                            <div
+                                class="inline-flex items-center gap-2.5 bg-white/20 backdrop-blur-md p-1.5 pr-4 rounded-full text-xs font-black tracking-widest uppercase text-white shadow-md border border-white/20">
+                                <span
+                                    class="w-8 h-8 rounded-full border-2 border-amber-400 bg-white flex items-center justify-center text-base shadow-sm">🇵🇦</span>
+                                <span class="flex items-center gap-1.5">
+                                    <span class="text-secondary-fixed font-black">¡YA EN PANAMÁ!</span>
+                                    <span class="hidden sm:inline text-white/90 font-medium">• SAZÓN 100% COLOMBIANO
+                                        🇨🇴</span>
+                                </span>
+                            </div>
+                            <h1
+                                class="font-display-lg-mobile lg:font-display-lg text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-white leading-[1.05] tracking-tight drop-shadow-sm">
+                                EL MEJOR POLLO<br />
+                                <span class="text-amber-400">LLEGÓ A PANAMÁ</span>
+                            </h1>
+                            <p
+                                class="font-body-md text-base sm:text-lg text-white/90 max-w-xl font-medium leading-relaxed">
+                                El inconfundible pollo apanado estilo Miami con la sazón y
+                                tradición de Colombia. Marinado 24 horas y con doble rebozado
+                                crujiente que enamora a toda la familia.
+                            </p>
+                            <div class="flex flex-wrap items-center gap-4 pt-2">
+                                <a class="inline-flex items-center justify-center gap-2 bg-white text-primary hover:bg-neutral-100 font-label-lg px-8 py-3.5 rounded-full font-black shadow-lg transition-all transform hover:scale-105 active:translate-y-0.5 tracking-wide text-sm sm:text-base"
+                                    href="#menu">
+                                    <span class="material-symbols-outlined text-xl">restaurant_menu</span>
+                                    VER MENÚ PANAMÁ</a>
+                                <a class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white hover:bg-[#20ba59] font-label-lg px-7 py-3.5 rounded-full font-black shadow-lg transition-all transform hover:scale-105 active:translate-y-0.5 text-sm sm:text-base"
+                                    href="https://wa.me/?text=Hola%20Miami%20Bros%20Panama!%20Quiero%20hacer%20un%20pedido%20en%20Panama"
+                                    target="_blank">
+                                    <span class="material-symbols-outlined text-xl">chat</span>
+                                    PEDIR POR WHATSAPP</a>
+                            </div>
+                            <div class="flex items-center gap-2 pt-4">
+                                <span class="w-7 h-2.5 rounded-full bg-white transition-all">
+                                </span>
+                                <span
+                                    class="w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all cursor-pointer">
+                                </span>
+                                <span
+                                    class="w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all cursor-pointer">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-6 relative flex justify-center items-center mt-6 lg:mt-0">
+                            <div class="relative max-w-md sm:max-w-lg w-full">
+                                <img alt="Miami Bro's Oficial Llegó a Panamá"
+                                    class="w-full h-auto object-cover rounded-3xl drop-shadow-[0_20px_35px_rgba(0,0,0,0.45)] transform hover:scale-105 transition-transform duration-500"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwYD4t7gkaDVRASdaTcb7k-g2--9jegfo7D7AweZsFmS5nULYtVZGoOpRaMPwnrgKQ4ObtnU4Jg1gBRCpSd07E0DVNuuxKbRJWUQMK_41elyvvUIcvBLyPkqghXaVxW9uUPnBCCIqH6OlTADTTFTqPvysyz4Lalmcybd4Jy41mlnfiFSY1fmmdcPQV4KozIvwSC4bzEMNhMqTftxlMjaQ8C6fBL2ktaYDBN7ucflDdxPCPi1Eaz6zIqpkpMgGcn_RIs-o" />
+                                <div
+                                    class="absolute -top-4 right-2 sm:right-6 bg-white text-primary rounded-full p-4 sm:p-5 shadow-2xl flex flex-col items-center justify-center text-center transform rotate-6 border-4 border-amber-400">
+                                    <span
+                                        class="text-[10px] sm:text-xs font-black uppercase text-on-surface-variant tracking-wider leading-none">Super
+                                        Bucket</span>
+                                    <span
+                                        class="text-xl sm:text-2xl font-black text-primary leading-none mt-1">$14.99</span>
+                                    <span
+                                        class="text-[11px] font-black uppercase text-on-surface-variant leading-none">USD
+                                        / PAB</span>
+                                    <span class="text-[9px] text-gray-400 line-through font-bold mt-0.5">$18.50
+                                        USD</span>
+                                </div>
+                                <div
+                                    class="absolute -left-4 sm:-left-8 top-1/4 bg-white text-on-surface p-2 sm:p-2.5 rounded-2xl shadow-2xl border-2 border-amber-400 flex items-center gap-3 transform -rotate-3 hover:rotate-0 transition-transform duration-300 z-20 group">
+                                    <div
+                                        class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-primary shadow-sm flex-shrink-0 bg-primary/10">
+                                        <img alt="Mascotas Oficiales Miami Bro's"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhssxA9LhcqL5_RIcugtR1RgcUoQRolC8V37z_uF47A0bHcknmaxrwF7e30jy5V7NVbQRm5xo68zbp3_RUR5dTnn0uSKSL979TeeE1WcXL1WrVNfAHTcBFkCbbQroLyG2EFYGLRmTTs4bZIjlfKcFuEVR49dQ8gmQecnYhiRW7XG4FpAXSkid9oOWPCmL4WiSBUL_IcOCP4CyDGriROTx734mTZDFJsaefOqa383R8Huevy3E4sLZkdbVExPXsfvh6g9Q" />
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="block text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-primary">¡Sabor
+                                            de Hermanos!</span>
+                                        <span
+                                            class="block text-xs sm:text-sm font-black leading-tight text-on-surface">De
+                                            Colombia 🇨🇴<br />para Panamá 🇵🇦</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="hidden sm:flex absolute -right-2 bottom-8 items-center gap-1 bg-amber-400 text-on-secondary-container px-3 py-1 rounded-full shadow-md text-xs font-black">
+                                    <span class="material-symbols-outlined text-sm">verified</span>
+                                    100% Sazón Criollo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <nav class="w-full bg-white border-b border-surface-container-high shadow-md relative z-20">
+                <div class="max-w-7xl mx-auto px-4 py-3">
+                    <div class="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
+                        <button aria-label="Anterior"
+                            class="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-primary flex-shrink-0 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+                        </button>
+                        <div class="flex items-center gap-2 sm:gap-4 flex-nowrap min-w-max mx-auto px-2">
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-xs font-extrabold shadow-sm tracking-wide"
+                                href="#combos">
+                                <span class="material-symbols-outlined text-base">takeout_dining</span>
+                                BALDES &amp; BUCKETS</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">fastfood</span>
+                                COMBOS PERSONALES</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">lunch_dining</span>
+                                HAMBURGUESAS CRISPY</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">egg</span>
+                                TENDERS &amp; ALITAS</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">restaurant</span>
+                                CHICHARRÓN &amp; PATACÓN</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">soup_kitchen</span>
+                                SALSAS &amp; DIPS</a>
+                            <a class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-xs font-bold transition-all"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-base">local_bar</span>
+                                BEBIDAS</a>
+                        </div>
+                        <button aria-label="Siguiente"
+                            class="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-primary flex-shrink-0 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <section class="max-w-7xl mx-auto px-margin pt-10 pb-4 w-full" id="ofertas-especiales">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-md border border-surface-container-high flex items-center justify-between gap-4 relative overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="space-y-1.5 z-10">
+                            <div class="flex items-center gap-1.5">
+                                <span
+                                    class="inline-block bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">🇵🇦
+                                    PANAMÁ</span>
+                                <span
+                                    class="inline-flex items-center gap-1 bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide border border-primary/20">¡YA
+                                    ABRIMOS!</span>
+                            </div>
+                            <h3 class="font-headline-sm text-lg font-black text-on-surface leading-tight">
+                                BURGER PANAMÁ CRISPY
+                            </h3>
+                            <p class="font-body-sm text-xs text-on-surface-variant font-medium">
+                                Pechuga doble crujiente con pickles &amp; salsa especial
+                            </p>
+                            <div class="pt-2">
+                                <span class="font-black text-primary text-xl">$6.99 USD</span>
+                                <div class="flex items-center gap-1.5 mt-2">
+                                    <span class="w-4 h-1.5 rounded-full bg-amber-400"> </span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-gray-200"> </span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-gray-200"> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="w-32 h-32 flex-shrink-0 relative overflow-hidden rounded-xl border border-surface-container-high">
+                            <img alt="¡Ya Abrimos Panamá! Burger Miami Bros"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 shadow-sm"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3grEb3GWiH9B8Gi7P5PIgukZtCnAETVG-ziWsiOc0naFaJYKNNZBjdRMnFR8OM6iVVmIS-56Tb61D5VaHVM8vLY5-tx-TZrHRIuoPQMqYvdcPA5ih2j1B5yt_Jk8h7NjTIv6_I0VpHvD-ygty-39tt7Oo8RdazutzTE6B2JY6gDO3ZiXHMCbs7W4thUAiNMVSsvPVEp9IcDJSW74QdQKZNJ935Z43sv2I88kSxQ6S09QRtaMHB9v_17IsqcVKABwCwSQ" />
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-[#e51a24] via-[#bb0015] to-[#7c000e] rounded-2xl p-5 shadow-xl text-white flex items-center justify-between gap-4 relative overflow-hidden group hover:shadow-2xl transition-all border-2 border-amber-400">
+                        <div
+                            class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 pointer-events-none blur-xl">
+                        </div>
+                        <div class="space-y-1.5 z-10 flex-1">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span
+                                    class="inline-flex items-center gap-1 bg-amber-400 text-on-secondary-container text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                                    <span class="material-symbols-outlined text-xs">star</span>
+                                    FAVORITA EN PANAMÁ</span>
+                            </div>
+                            <h3 class="font-headline-sm text-lg font-black text-white leading-tight mt-1">
+                                DÚO BRO'S: ALITAS + PAPAS
+                            </h3>
+                            <p class="font-body-sm text-xs text-white/90 font-medium leading-relaxed">
+                                12 alitas doradas con papas y dips autorales Miami Bro's.
+                            </p>
+                            <div class="pt-2 flex items-center justify-between gap-2">
+                                <div class="flex flex-col">
+                                    <span class="font-black text-amber-400 text-xl leading-none">$7.99
+                                        <span class="text-[11px] font-bold text-white/80">USD</span>
+                                    </span>
+                                    <span class="text-[9px] text-white/70 line-through mt-0.5">$9.50 USD</span>
+                                </div>
+                                <a class="inline-flex items-center gap-1 bg-amber-400 hover:bg-secondary-fixed text-on-secondary-container font-label-sm text-[11px] font-black px-3 py-1.5 rounded-full shadow-md transition-all active:translate-y-0.5"
+                                    href="https://wa.me/?text=Hola%20Miami%20Bros%20Panama!%20Quiero%20el%20Duo%20Alitas"
+                                    target="_blank">
+                                    <span class="material-symbols-outlined text-sm">shopping_bag</span>
+                                    Pedir</a>
+                            </div>
+                        </div>
+                        <div
+                            class="w-32 h-32 flex-shrink-0 relative overflow-hidden rounded-xl border-2 border-amber-400">
+                            <img alt="Burger de Pollo Miami Bros"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT1GQyUF6fkngGE_c_epGjpIl2Bpsqz66IdARaSx-DBjpcbpXTySbZIJ0kokUeEmNLokphzaUe9lj5pEWLTPxVY9aDJ8iIBYQnQhdJMsMjbJ0t3yEsmT8RiRO-rFXGJ0g0JFeYLt3JjaAVgKyZyqgmx-Czndw634bTb24oC0hqv-4DsiOBj1OQ9qEsAdrwi0Sf-Jjw5uW-6L7HgOsWXCz8mjcZ79VlPUUkrg44XsYdDULDzMRQRASfzbc5oBukp2g6Luk" />
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-md border border-surface-container-high flex items-center justify-between gap-4 relative overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="space-y-1.5 z-10">
+                            <span
+                                class="inline-block bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">📍
+                                CIUDAD DE PANAMÁ</span>
+                            <h3 class="font-headline-sm text-lg font-black text-on-surface leading-tight">
+                                ENCUENTRA TU BRO'S
+                            </h3>
+                            <p class="font-body-sm text-xs text-on-surface-variant font-medium">
+                                Restaurante físico en Panamá &amp; Envíos express
+                            </p>
+                            <div class="pt-2">
+                                <a class="inline-flex items-center gap-1 text-xs font-black text-primary hover:underline"
+                                    href="#locales">Sedes Panamá &amp; Horarios
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                                <div class="flex items-center gap-1.5 mt-2">
+                                    <span class="w-4 h-1.5 rounded-full bg-primary"> </span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-gray-200"> </span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-gray-200"> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="w-28 h-28 flex-shrink-0 bg-primary/5 rounded-2xl flex flex-col items-center justify-center p-3 text-center border border-primary/20">
+                            <span class="material-symbols-outlined text-primary text-4xl mb-1">location_on</span>
+                            <span class="text-[11px] font-black text-primary leading-tight">SEDES PANAMÁ</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="max-w-7xl mx-auto px-margin py-space-xl w-full" id="menu">
+                <div class="text-center max-w-2xl mx-auto mb-space-xl">
+                    <span
+                        class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase bg-primary-fixed px-3 py-1 rounded-full inline-block mb-2">🇵🇦
+                        Llegó a Panamá • Sabor 100% Colombiano 🇨🇴</span>
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight mb-2">
+                        Nuestro Menú Legendario
+                    </h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Piezas doradas, tenders gigantes, hamburguesas monumentales y el
+                        tradicional chicharrón con patacones. Precios oficiales en USD /
+                        Balboas.
+                    </p>
+                </div>
+                <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+                    <!-- Renderizado dinámicamente con public/js/app.js -->
+                </div>
+                <section class="w-full bg-white py-space-xl border-t border-surface-container-high overflow-hidden"
+                    id="comunidad">
+                    <div class="max-w-7xl mx-auto px-margin">
+                        <div class="text-center max-w-3xl mx-auto mb-space-xl">
+                            <span
+                                class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-3 border border-primary/20">❤️
+                                Experiencia &amp; Comunidad Miami Bro's</span>
+                            <h2
+                                class="font-headline-lg text-headline-lg sm:text-4xl text-on-surface tracking-tight leading-tight mb-3 font-black">
+                                EL SABOR SE COMPARTE EN FAMILIA &amp; AMIGOS
+                            </h2>
+                            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                                El verdadero crunch no solo se come, ¡se vive y se disfruta
+                                juntos! Mira cómo se viven los momentos más crocantes en nuestro
+                                restaurante en Panamá.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                            <div
+                                class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-surface-container-high shadow-md hover:shadow-xl transition-all group flex flex-col">
+                                <div class="relative overflow-hidden aspect-[4/5]">
+                                    <img alt="En familia se disfruta mejor - Miami Bro's Panamá"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ7tO8BB_OTt08DNLjp4qXJ3seAExRK_WBLJ3riQ0LgqtIpo3bc15HTb029z14L8MdxgL8-0sAqXTyYdjrbjpr02Hqovhu2-ZxSbhoUPAn-LGgo0Ey1nrxbI4QS3oGN7YK4wu0sDFlaib1Ru_n-BLF35Zf6L6Mv3pP2F3BOzAtfo2hZWtXJmBwjAUtVV0eKugjPL_0E_ig5IzDgT-wbQ21KaWCnqqpKMIjWKE9opWzqoA9URzMbV-_9i0KLK2vtqezQ2o" />
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                                        <span class="text-xs font-black uppercase text-amber-400 block">Momentos
+                                            Reales</span>
+                                        <h4 class="font-headline-sm text-base font-bold">
+                                            En familia se disfruta mejor
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col justify-between bg-surface-container-low">
+                                    <p class="font-body-sm text-xs text-on-surface-variant">
+                                        Nuestras hamburguesas y canastillas de pollo doradas unen a
+                                        grandes y chicos en la mesa.
+                                    </p>
+                                    <span class="text-primary font-bold text-xs mt-2 block">@miamibross • Panamá</span>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-surface-container-high shadow-md hover:shadow-xl transition-all group flex flex-col">
+                                <div class="relative overflow-hidden aspect-[4/5]">
+                                    <img alt="El sabor se comparte con amigos - Miami Bro's Panamá"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCzdGXpSa18uyfMrj-_2Bf5RjacFafOvGrkSALUPPfVRS-D-wp936ARH0U1I0vZr_YNclQUlK-9mX0rxNOAKeqE9aodi4pO_fI8x0uOKv8Xw0oO8CHy2WVnyHGIID2B40sXHgRRniRI-IWZ1zcexwM3Qugbjs-ycyWhF6IFlsVCVQsbSKhj2vvIrIodJ0yeiZN3ZM-QsT73M1guMh12ZVxR1WgB501Qt0rh_1BbBhPPZlkYimQFj17MeEUltc1R_yP2uU" />
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                                        <span class="text-xs font-black uppercase text-amber-400 block">Sabor con
+                                            Amigos</span>
+                                        <h4 class="font-headline-sm text-base font-bold">
+                                            El sabor se comparte con amigos
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col justify-between bg-surface-container-low">
+                                    <p class="font-body-sm text-xs text-on-surface-variant">
+                                        Canastillas crujientes rebosantes de tenders y papas fritas
+                                        ideales para parchar en el restaurante.
+                                    </p>
+                                    <span class="text-primary font-bold text-xs mt-2 block">@miamibross • Panamá</span>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-surface-container-high shadow-md hover:shadow-xl transition-all group flex flex-col">
+                                <div class="relative overflow-hidden aspect-[4/5]">
+                                    <img alt="Sabor en cada bocado Miami Bros"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVc6y6311YFq-CFd9G6etkj074WM7xtPflxf7kM7c0QvRSgFyW4tvhq-763BrTAZEyUlC9BX3qHF_j9EwXzU_Z9LFxAiucG4g1PqD-kZhcuhUwO-NQlPpguVA1vTdwtpbnYFNZyVt-XhDbQ3WhNJaUdAv91o0Suzgv20tVX427Qt3aqkn-yWvnL1ELPEavWFOkQhPRrUuu9p3mLt8EJCgiNU6dk96g0nSUh1f0DijKqQjfBeJCCT3cPWKeM0vdnAgzhaU" />
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                                        <span class="text-xs font-black uppercase text-amber-400 block">Tradición
+                                            Colombiana</span>
+                                        <h4 class="font-headline-sm text-base font-bold">
+                                            Sabor en cada bocado
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col justify-between bg-surface-container-low">
+                                    <p class="font-body-sm text-xs text-on-surface-variant">
+                                        Costillas y chicharrón con patacones dorados: el auténtico
+                                        placer con receta de Colombia.
+                                    </p>
+                                    <span class="text-primary font-bold text-xs mt-2 block">@miamibross • Panamá</span>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-surface-container-high shadow-md hover:shadow-xl transition-all group flex flex-col">
+                                <div class="relative overflow-hidden aspect-[4/5]">
+                                    <img alt="¡Ya Abrimos Panamá! Miami Bros"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSVzzzb0MgrPUNmATpcYJL001uWrRHruFWAo1jO0vEJUu3J6IrV7YQQmGxQskYfCUcZZZqS4lql4cv2JnF_RGIeKn20H9r4QJ-6bNxvDUGiqjSvBczc76MroRNB7F14g-RgVKiwewE7ddYj4cbLPN7iQR2fBQZZJALBa6N-7Hijt-Tx37w0rXvMZ-y5nuMFxO5NvLKoM1tkZRr9HTLWCA3XheTYEBtwGN-_6p_3-zAZQM8NIOsz1G9dKWtPesQ3ZY9ANM" />
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                                        <span class="text-xs font-black uppercase text-amber-400 block">Apertura
+                                            Oficial</span>
+                                        <h4 class="font-headline-sm text-base font-bold">
+                                            ¡Ya abrimos Panamá!
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col justify-between bg-surface-container-low">
+                                    <p class="font-body-sm text-xs text-on-surface-variant">
+                                        Ven a conocernos y vive la experiencia del auténtico pollo
+                                        apanado crujiente.
+                                    </p>
+                                    <span class="text-primary font-bold text-xs mt-2 block">@miamibross • Panamá</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    class="w-full bg-surface-container-low py-space-xl border-t border-b border-surface-container-high"
+                    id="secretos">
+                    <div class="max-w-7xl mx-auto px-margin">
+                        <div class="text-center max-w-2xl mx-auto mb-space-xl">
+                            <span
+                                class="font-label-sm text-label-sm text-secondary-container font-bold tracking-wider uppercase bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full inline-block mb-2">🇨🇴
+                                De Colombia para Panamá 🇵🇦</span>
+                            <h2
+                                class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight mb-2">
+                                El Secreto del Sazón Miami Bro's
+                            </h2>
+                            <p class="font-body-md text-body-md text-on-surface-variant">
+                                Traemos directamente a Panamá la receta magistral colombiana:
+                                marinado de 24 horas, doble rebozado crujiente y guarniciones
+                                criollas con patacones.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+                            <div
+                                class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm hover:shadow-md transition-shadow">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-3xl">hourglass_top</span>
+                                </div>
+                                <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2">
+                                    Marinado 24 Horas
+                                </h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Cada presa reposa un día entero en salmuera con especias
+                                    secretas importadas, logrando sabor hasta el hueso.
+                                </p>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm hover:shadow-md transition-shadow">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-secondary-container/20 text-on-secondary-container flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-3xl">flare</span>
+                                </div>
+                                <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2">
+                                    Doble Rebozado Crunch
+                                </h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Técnica exclusiva de enharinado doble y fritura controlada por
+                                    temperatura para una corteza escamosa ultra crocante.
+                                </p>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm hover:shadow-md transition-shadow">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-tertiary-container/15 text-tertiary flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-3xl">liquor</span>
+                                </div>
+                                <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2">
+                                    Salsas de Autor
+                                </h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Recetas originales: Luigi Green Ranch con hierbas frescas,
+                                    Mario Hot Honey picante y Garlic Mayo criolla.
+                                </p>
+                            </div>
+                            <div
+                                class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm hover:shadow-md transition-shadow">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                                </div>
+                                <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2">
+                                    Empaques Térmicos
+                                </h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Cajas y baldes con micro-ventilación que liberan vapor sin
+                                    perder calor, garantizando crunch perfecto en tu casa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="max-w-7xl mx-auto px-margin py-space-xl w-full" id="opiniones">
+                    <div class="text-center max-w-2xl mx-auto mb-space-xl">
+                        <span
+                            class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase bg-primary-fixed px-3 py-1 rounded-full inline-block mb-2">Clientes
+                            Satisfechos</span>
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight mb-2">
+                            Lo que dicen los Bro's Lovers
+                        </h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            Más de 25.000 pedidos entregados con el crunch más aplaudido de
+                            las redes.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+                        <div
+                            class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex text-amber-500 gap-1">
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                </div>
+                                <p class="font-body-md text-on-surface italic">
+                                    "¡Por fin abrieron en Panamá! Qué alegría probar ese pollo tan
+                                    crocante con el auténtico sabor colombiano. El tender box con
+                                    salsa verde es una locura total."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-surface-container mt-6 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 text-primary font-black flex items-center justify-center font-label-md">
+                                    CR
+                                </div>
+                                <div>
+                                    <p class="font-label-md font-bold text-on-surface leading-none">
+                                        Carlos Rodríguez
+                                    </p>
+                                    <span class="font-body-sm text-xs text-on-surface-variant">Cliente en Salón • Ciudad
+                                        de Panamá 🇵🇦</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex text-amber-500 gap-1">
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                </div>
+                                <p class="font-body-md text-on-surface italic">
+                                    "El chicharrón con patacones dorados y guacamole me llevó
+                                    directo a Colombia. Y el balde para compartir con la familia
+                                    en Panamá rinde increíble."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-surface-container mt-6 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-secondary-container/30 text-secondary font-black flex items-center justify-center font-label-md">
+                                    VM
+                                </div>
+                                <div>
+                                    <p class="font-label-md font-bold text-on-surface leading-none">
+                                        Valeria Montoya
+                                    </p>
+                                    <span class="font-body-sm text-xs text-on-surface-variant">Pedido por WhatsApp • Vía
+                                        España</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high shadow-sm flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex text-amber-500 gap-1">
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                    <span class="material-symbols-outlined text-lg fill-1">star</span>
+                                </div>
+                                <p class="font-body-md text-on-surface italic">
+                                    "La mejor hamburguesa crispy de pollo en Panamá sin discusión.
+                                    El rebozado aguanta el viaje caliente y crujiente como recién
+                                    salido de cocina."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-surface-container mt-6 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-tertiary-container/20 text-tertiary font-black flex items-center justify-center font-label-md">
+                                    SG
+                                </div>
+                                <div>
+                                    <p class="font-label-md font-bold text-on-surface leading-none">
+                                        Santiago Gómez
+                                    </p>
+                                    <span class="font-body-sm text-xs text-on-surface-variant">Pedido a Domicilio • San
+                                        Francisco</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="w-full bg-primary text-on-primary py-space-xl px-margin relative overflow-hidden">
+                    <div class="max-w-5xl mx-auto text-center space-y-space-md relative z-10">
+                        <span
+                            class="bg-surface-container-lowest/20 text-white font-label-sm text-xs uppercase tracking-widest px-4 py-1.5 rounded-full inline-block font-extrabold">¿Antojo
+                            Inmediato?</span>
+                        <h2
+                            class="font-display-md text-display-md-mobile sm:text-display-md font-black text-white leading-tight">
+                            Pide Ahora y Siente el Auténtico Crunch Legendario
+                        </h2>
+                        <p class="font-body-lg text-white/90 max-w-2xl mx-auto">
+                            Te lo llevamos caliente y recién frito a la puerta de tu casa u
+                            oficina en tiempo récord.
+                        </p>
+                        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                            <a class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-label-lg px-8 py-4 rounded-full font-bold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all transform hover:scale-105"
+                                href="https://wa.me/?text=Hola%20Miami%20Bros!%20Quiero%20ordenar%20mi%20combo%20ahora"
+                                target="_blank">
+                                <span class="material-symbols-outlined text-xl">chat</span>
+                                Pedir por WhatsApp</a>
+                            <a class="inline-flex items-center gap-2 bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-lg px-8 py-4 rounded-full font-bold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all transform hover:scale-105"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-xl">menu_book</span>
+                                Explorar Todo el Menú</a>
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </main>
+    <footer class="w-full bg-surface-container-low pt-space-xl pb-space-lg shadow-[0_-4px_20px_rgba(0,0,0,0.03)]"
+        id="contacto">
+        <div class="max-w-7xl mx-auto px-margin">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg mb-space-xl lg:grid-cols-3" id="locales">
+                <div class="space-y-space-sm">
+                    <div class="flex items-center gap-space-sm">
+                        <img alt="Miami Bro's Pollo Apanado Logo"
+                            class="w-12 h-12 rounded-full object-cover shadow-[0_2px_8px_rgba(187,0,21,0.2)] border border-primary/30"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuATF_lgsDcwCUcsDOXCvi1stPy9EDWWJ-NICMN_J9vA8Rua_psWADqVRBfU_j0G10qLNeG4NtqUCZZrVWCObEdLcwTZ5qhXvgdLx9zTjACnl2S_klaGje6OFn-uQz8URlmFssx1tBy_yGlHm-Dct0pVnEu8K_sB7iUiKUMOQs9G70eK6JPJPBQifT73egtcwZEL-j2fSXJmp7Vbnxpa58PoU6vTwmlpbR77hw7OuFYyGlsvZX_uMmUvliCM6deNeJFYQJ0" />
+                        <div>
+                            <p class="font-headline-sm text-headline-sm text-primary leading-tight font-black">
+                                Miami Bro's
+                            </p>
+                            <p class="font-label-sm text-xs text-primary font-bold uppercase tracking-wider mt-0.5">
+                                🇵🇦 ¡YA EN PANAMÁ! • 🇨🇴 SAZÓN COLOMBIANO
+                            </p>
+                        </div>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        El auténtico pollo frito apanado crujiente por fuera y jugoso por
+                        dentro, con receta colombiana de marinado tradicional. ¡Llegamos a
+                        Panamá para deleitar a toda la familia!
+                    </p>
+                    <div class="flex items-center gap-space-xs pt-space-xs">
+                        <span
+                            class="font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed font-bold px-space-sm py-0.5 rounded-full">🇵🇦
+                            Panamá</span>
+                        <span
+                            class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold px-space-sm py-0.5 rounded-full">🇨🇴
+                            Sabor Colombiano</span>
+                    </div>
+                </div>
+                <div class="space-y-space-sm">
+                    <p class="font-headline-sm text-headline-sm text-on-surface">
+                        Horarios &amp; Sedes Panamá
+                    </p>
+                    <div class="space-y-space-xs">
+                        <p class="font-label-md text-label-md text-primary font-bold flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-base">storefront</span>
+                            Salón &amp; Domicilios Panamá
+                        </p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Lunes a Domingo: 11:30 AM - 10:30 PM
+                        </p>
+                        <p
+                            class="font-label-md text-label-md text-on-surface font-bold mt-space-xs flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-base">moped</span>
+                            Cobertura Ciudad de Panamá
+                        </p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Envíos rápidos a San Francisco, Costa del Este, Vía España, El
+                            Cangrejo, Obarrio y alrededores.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-space-sm">
+                    <p class="font-headline-sm text-headline-sm text-on-surface">
+                        Navegación Rápida
+                    </p>
+                    <ul class="space-y-space-xs">
+                        <li class="font-body-sm text-body-sm">
+                            <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+                                href="#menu">
+                                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                Menú de Piezas &amp; Alitas</a>
+                        </li>
+                        <li class="font-body-sm text-body-sm">
+                            <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+                                href="#combos">
+                                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                Super Combos Familiares</a>
+                        </li>
+                        <li class="font-body-sm text-body-sm">
+                            <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+                                href="#secretos">
+                                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                Salsas &amp; Guarniciones Criollas</a>
+                        </li>
+                        <li class="font-body-sm text-body-sm">
+                            <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+                                href="#locales">
+                                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                Ubicaciones &amp; Pick-up</a>
+                        </li>
+                        <li class="font-body-sm text-body-sm">
+                            <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1"
+                                href="https://wa.me/?text=Hola%20quiero%20informacion%20de%20franquicias"
+                                target="_blank">
+                                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                Franquicias &amp; Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-space-md border-t border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-space-sm">
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    © 2026 Miami Bro's Pollo Apanado. Todos los derechos reservados.
+                </p>
+                <div class="flex items-center gap-space-md">
+                    <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Términos &amp; Condiciones</a>
+                    <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Políticas de Delivery</a>
+                    <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Aviso de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
