@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Migrar Nuevos Platos (PedidosYa)</title>
+  <style>body{font-family:sans-serif; text-align:center; padding-top:50px;}</style>
+</head>
+<body>
+  <h1>Subiendo catálogo extra a Firestore...</h1>
+  <p id="status">Por favor espera...</p>
+  
+  <script type="module">
+    import { db } from './js/firebase.js';
+    import { collection, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+    // Todos los nuevos productos recolectados
+    const nuevosPlatos = [
+      // Bebidas Granizadas
+      { titulo: "Frozen de guanabana en leche", descripcion: "Bebida natural granizada de guanábana en leche", precio: 4.00, categoria: "Bebidas Granizadas" },
+      { titulo: "Frozen guanabana en agua", descripcion: "Granizado natural de guanabana en agua", precio: 3.00, categoria: "Bebidas Granizadas" },
+      // Combos Niños
+      { titulo: "Bros kids tenders niños", descripcion: "6 tenders + porcion de papas + juguito en cajita", precio: 5.50, categoria: "Kids" },
+      { titulo: "Bros kids muslo de pollo", descripcion: "Muslo de pollo apanado + porción de papas + juguito en cajita", precio: 5.50, categoria: "Kids" },
+      // Sides
+      { titulo: "Mazorca", descripcion: "4 mazorcas bañadas en mantequilla y rub de la casa", precio: 4.99, categoria: "Sides" },
+      { titulo: "Arepas", descripcion: "2 unidades de arepas rellenas de queso", precio: 1.50, categoria: "Sides" },
+      { titulo: "Papas fritas", descripcion: "120 g de papas fritas", precio: 2.50, categoria: "Sides" },
+      { titulo: "Aros de cebolla", descripcion: "200 g de aros de cebolla", precio: 2.99, categoria: "Sides" },
+      { titulo: "Ensalada de repollo", descripcion: "Ensalada de repollo chica", precio: 3.00, categoria: "Sides" },
+      { titulo: "Yuca frita", descripcion: "120 g de yuca frita", precio: 3.50, categoria: "Sides" },
+      { titulo: "Puré con gravy", descripcion: "Puré cremoso con gravy de la casa", precio: 1.99, categoria: "Sides" },
+      { titulo: "Ensalada grande", descripcion: "Ensalada de repollo grande", precio: 4.99, categoria: "Sides" },
+      // Burritos y especiales
+      { titulo: "Burrito bro's", descripcion: "Tortilla de harina + salsa ranch o bbq + lechuga romana + tomate + pollo apanado + aguacate + papas fritas", precio: 7.99, categoria: "Especiales" },
+      { titulo: "Crazy bro's", descripcion: "Papas fritas + mermelada de bacon y cebolla en salsa", precio: 8.99, categoria: "Especiales" },
+      { titulo: "Bros salad", descripcion: "Lechuga romana + pechuga crispy + aderezo caesar", precio: 12.95, categoria: "Especiales" },
+      { titulo: "Chuleta de cerdo valluna", descripcion: "Chuleta de cerdo apanada y crocante (carne pulpa)", precio: 12.99, categoria: "Especiales" },
+      { titulo: "Chicharron porkbelly", descripcion: "Chicharron + patacon y guacamole", precio: 12.99, categoria: "Especiales" },
+      { titulo: "Chuleta de pollo", descripcion: "Chuleta de pollo con papas fritas y ensalada de tomate", precio: 9.99, categoria: "Especiales" },
+      // Bebidas
+      { titulo: "Bebida Gaseosa Fanta Manzana Verde", descripcion: "354 ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Gaseosa Coca-Cola Zero Azucar Lata", descripcion: "354 ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Gaseosa Coca-Cola Lata", descripcion: "354 ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Soda Fresca Toronja Lata", descripcion: "354 ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Fanta Fresa Lata", descripcion: "354 ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Malta Pony 330ml", descripcion: "Producto colombiano 330cm3", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Postobon Manzana 400ml", descripcion: "Producto 100% colombiano 400ml", precio: 2.00, categoria: "Bebidas" },
+      { titulo: "Fanta Uva Lata", descripcion: "354ml", precio: 2.00, categoria: "Bebidas" },
+      // Alitas, boneless y fingers
+      { titulo: "Alitas bbq 10", descripcion: "10 alitas bañadas en salsa bbq", precio: 10.50, categoria: "Alitas" },
+      { titulo: "Alitas bbq 6", descripcion: "6 alitas bañadas en salsa bbq", precio: 7.50, categoria: "Alitas" },
+      { titulo: "Alitas bbq 14", descripcion: "14 alitas bañadas en salsa bbq", precio: 14.50, categoria: "Alitas" },
+      { titulo: "Bros tender", descripcion: "9 deditos de pollo con papas", precio: 8.99, categoria: "Alitas" },
+      // Hamburguesas
+      { titulo: "Bro's burger", descripcion: "Pan brioche + carne molida angus + mermelada de bacon y cebolla + queso cheddar + lechuga + tomate", precio: 8.99, categoria: "Hamburguesas" },
+      { titulo: "Fit burger", descripcion: "Pan brioche + salsa de la casa + tomate + lechuga + carne molida angus + queso cheddar + bacon", precio: 12.99, categoria: "Hamburguesas" },
+      // Combos de pollo
+      { titulo: "Bro's papa", descripcion: "2 presas + miel + papas fritas + soda", precio: 6.99, categoria: "Combos de pollo" },
+      { titulo: "Combo nuestro", descripcion: "4 presas + 1 ord de papas + 1 ensalada de repollo + 1 ord de arepas.", precio: 12.99, categoria: "Combos de pollo" },
+      { titulo: "Combo especial", descripcion: "8 presas + miel + 1 porción de papas + 1 ensalada + 1 porción de arepas + 1 puré", precio: 19.99, categoria: "Combos de pollo" },
+      { titulo: "Combo unido", descripcion: "10 presas + miel + 2 puré + 2 porciones de papas + 1 ensalada", precio: 24.99, categoria: "Combos de pollo" },
+      { titulo: "Combo compartir", descripcion: "12 presas + miel + 1 porción de yuca + 2 porciones de papas + 1 ensalada + 2 porciones de arepa + 1 puré", precio: 29.99, categoria: "Combos de pollo" },
+      { titulo: "Combo familiar", descripcion: "20 presas de pollo + 2 porciones de papas + 1 ensalada + 2 porciones de arepas + 1 porción de yuca + 1 puré", precio: 35.99, categoria: "Combos de pollo" }
+    ];
+
+    async function migrarDatos() {
+      const status = document.getElementById("status");
+      try {
+        let contador = 9; // Empezar IDs desde el 9 porque ya hay 8 productos previos
+        for (let item of nuevosPlatos) {
+          const docId = 'prod-' + String(contador).padStart(3, '0');
+          const prodData = {
+            titulo: item.titulo,
+            descripcion: item.descripcion,
+            precio: item.precio,
+            precioStr: '$' + item.precio.toFixed(2) + ' USD',
+            insignia: item.categoria === "Especiales" || item.categoria === "Hamburguesas" ? "RECOMENDADO" : "",
+            insignia_color: "bg-secondary-container text-on-secondary-container",
+            imagen_url: "https://placehold.co/400x300?text=" + encodeURIComponent(item.titulo), // Placeholder image
+            mensaje_wa: "Hola quiero pedir " + item.titulo,
+            link_pedidos_ya: "https://www.pedidosya.com.pa/restaurantes/ciudad-de-panama/miami-bros-b23a9997-e5ff-4f03-8fe9-9bfe2e0f757c-menu",
+            orden: contador,
+            activo: true
+          };
+          
+          await setDoc(doc(db, "productos", docId), prodData);
+          console.log("Subido: " + prodData.titulo);
+          contador++;
+        }
+        status.innerHTML = "<h2 style='color:green;'>¡32 productos nuevos subidos exitosamente!</h2><p>Ya puedes cerrar esta pestaña y ver tu menú.</p>";
+      } catch (error) {
+        console.error("Error al migrar:", error);
+        status.innerText = "Error: " + error.message;
+      }
+    }
+
+    window.onerror = function(msg) {
+      document.getElementById("status").innerText = "Error crítico: " + msg;
+    };
+
+    migrarDatos();
+  </script>
+</body>
+</html>

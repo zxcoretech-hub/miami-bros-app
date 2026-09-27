@@ -53,11 +53,11 @@ async function renderMenu() {
               <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
                 ${item.descripcion}
               </p>
-              <div class="pt-space-sm border-t border-surface-container-high flex items-center justify-between mt-auto">
-                <span class="font-headline-sm text-headline-sm text-primary font-extrabold">
+                <div class="pt-space-sm border-t border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-4 mt-auto">
+                <span class="font-headline-sm text-headline-sm text-primary font-extrabold w-full md:w-auto text-center md:text-left">
                   ${item.precioStr || '$' + item.precio + ' USD'}
                 </span>
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto">
                   <div class="flex items-center border border-surface-container-high rounded-full px-2 py-0.5 bg-surface-container-low">
                     <button
                       class="font-bold px-1 text-on-surface-variant hover:text-primary"
@@ -75,15 +75,27 @@ async function renderMenu() {
                       +
                     </button>
                   </div>
-                  <a
-                    id="wa-link-${item.id}"
-                    class="inline-flex items-center gap-1 bg-[#25D366] text-white hover:bg-[#20ba59] font-label-sm text-label-sm px-3 py-1.5 rounded-full shadow-sm transition-all"
-                    href="https://wa.me/?text=${encodeURIComponent(item.mensaje_wa + " (Cantidad: 1)")}"
-                    target="_blank"
-                  >
-                    <span class="material-symbols-outlined text-sm">chat</span>
-                    WhatsApp
-                  </a>
+                  <div class="flex gap-2">
+                    <a
+                      id="wa-link-${item.id}"
+                      class="inline-flex items-center gap-1 bg-[#25D366] text-white hover:bg-[#20ba59] font-label-sm text-label-sm px-3 py-1.5 rounded-full shadow-sm transition-all"
+                      href="https://wa.me/?text=${encodeURIComponent(item.mensaje_wa + " (Cantidad: 1)")}"
+                      target="_blank"
+                      title="Pedir por WhatsApp"
+                    >
+                      <span class="material-symbols-outlined text-sm">chat</span>
+                    </a>
+                    ${item.link_pedidos_ya ? `
+                    <a
+                      class="inline-flex items-center justify-center bg-[#FF004D] text-white hover:bg-[#d60040] font-label-sm text-label-sm px-3 py-1.5 rounded-full shadow-sm transition-all"
+                      href="${item.link_pedidos_ya}"
+                      target="_blank"
+                      title="Pedir por PedidosYa"
+                    >
+                      <img src="https://images.deliveryhero.io/image/pedidosya/peya_logo.png" alt="PedidosYa" class="h-4 object-contain">
+                    </a>
+                    ` : ''}
+                  </div>
                 </div>
               </div>
             </div>
