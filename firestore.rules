@@ -1,18 +1,110 @@
-rules_version='2'
+rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Un usuario es admin si existe su documento en la colección /admins/{uid}.
+    // (exists() dentro de las reglas es una lectura privilegiada: funciona aunque
+    //  la colección /admins esté cerrada al público.)
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ---- Validadores (defensa en profundidad) ----
+    // Acceso directo por punto (d.campo) y "campo in d" para los opcionales.
+    // Objetivo: rechazar tipos incorrectos y textos descomunales, sin bloquear
+    // lo que el panel escribe (los campos opcionales solo se validan si existen).
+    function validProducto(d) {
+      return d.titulo is string && d.titulo.size() > 0 && d.titulo.size() <= 120
+        && (!('categoria' in d)        || (d.categoria is string && d.categoria.size() <= 80))
+        && (!('descripcion' in d)      || (d.descripcion is string && d.descripcion.size() <= 2000))
+        && (!('precioStr' in d)        || (d.precioStr is string && d.precioStr.size() <= 40))
+        && (!('insignia' in d)         || (d.insignia is string && d.insignia.size() <= 80))
+        && (!('insignia_color' in d)   || (d.insignia_color is string && d.insignia_color.size() <= 120))
+        && (!('mensaje_wa' in d)       || (d.mensaje_wa is string && d.mensaje_wa.size() <= 800))
+        && (!('link_pedidos_ya' in d)  || (d.link_pedidos_ya is string && d.link_pedidos_ya.size() <= 2000))
+        && (!('imagen_url' in d)       || (d.imagen_url is string && d.imagen_url.size() <= 2000))
+        && (!('precio' in d)           || d.precio is number)
+        && (!('orden' in d)            || d.orden is number)
+        && (!('activo' in d)           || d.activo is bool);
+    }
+    function validPromo(d) {
+      return d.titulo is string && d.titulo.size() > 0 && d.titulo.size() <= 120
+        && (!('etiqueta' in d)    || (d.etiqueta is string && d.etiqueta.size() <= 80))
+        && (!('descripcion' in d) || (d.descripcion is string && d.descripcion.size() <= 2000))
+        && (!('imagen' in d)      || (d.imagen is string && d.imagen.size() <= 2000))
+        && (!('orden' in d)       || d.orden is number);
+    }
+    function validOpinion(d) {
+      return d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 120
+        && (!('comentario' in d) || (d.comentario is string && d.comentario.size() <= 1000))
+        && (!('estrellas' in d)  || d.estrellas is number)
+        && (!('orden' in d)      || d.orden is number);
+    }
+    function validLocal(d) {
+      return d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 160
+        && (!('direccion' in d) || (d.direccion is string && d.direccion.size() <= 300))
+        && (!('horario' in d)   || (d.horario is string && d.horario.size() <= 200))
+        && (!('mapa' in d)      || (d.mapa is string && d.mapa.size() <= 2000))
+        && (!('orden' in d)     || d.orden is number);
+    }
+    function validCategoria(d) {
+      return d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 80
+        && (!('orden' in d) || d.orden is number);
+    }
+    function validConfig(d) {
+      return (!('whatsapp' in d)        || (d.whatsapp is string && d.whatsapp.size() <= 30))
+        && (!('instagram' in d)         || (d.instagram is string && d.instagram.size() <= 300))
+        && (!('banner_texto' in d)      || (d.banner_texto is string && d.banner_texto.size() <= 300))
+        && (!('hero_titulo' in d)       || (d.hero_titulo is string && d.hero_titulo.size() <= 120))
+        && (!('hero_subtitulo' in d)    || (d.hero_subtitulo is string && d.hero_subtitulo.size() <= 200))
+        && (!('hero_imagen_url' in d)   || (d.hero_imagen_url is string && d.hero_imagen_url.size() <= 2000));
+    }
+
+    // Colección de administradores: NADIE la lee ni la escribe desde la app.
+    // Se gestiona ÚNICAMENTE desde la Consola de Firebase.
+    match /admins/{uid} {
+      allow read, write: if false;
+    }
+
+    // Contenido público del sitio: cualquiera lo LEE (para mostrar la web),
+    // pero solo un admin autenticado lo puede CREAR / EDITAR / BORRAR.
+    // Crear/editar además valida la forma del documento; borrar solo exige admin.
+    match /productos/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validProducto(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /categorias/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validCategoria(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /promociones/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validPromo(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /opiniones/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validOpinion(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /locales/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validLocal(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /configuracion/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validConfig(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Cualquier otra ruta no contemplada queda denegada por completo.
     match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read, write: if true;
+      allow read, write: if false;
     }
   }
 }

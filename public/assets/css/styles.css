@@ -18,3 +18,39 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* ===== Carta tipo libro: apertura y paso de página ===== */
+@keyframes unfoldBook {
+  0%   { transform: perspective(1000px) rotateY(-90deg) scale(0.8); opacity: 0; }
+  100% { transform: perspective(1000px) rotateY(0deg) scale(1);     opacity: 1; }
+}
+.animate-unfold-book {
+  animation: unfoldBook 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  transform-origin: center center;
+}
+
+@keyframes turnOutNext {
+  0%   { transform: perspective(1200px) rotateY(0deg);   opacity: 1; }
+  100% { transform: perspective(1200px) rotateY(-90deg); opacity: 0; }
+}
+@keyframes turnInNext {
+  0%   { transform: perspective(1200px) rotateY(90deg); opacity: 0; }
+  100% { transform: perspective(1200px) rotateY(0deg);  opacity: 1; }
+}
+@keyframes turnOutPrev {
+  0%   { transform: perspective(1200px) rotateY(0deg);  opacity: 1; }
+  100% { transform: perspective(1200px) rotateY(90deg); opacity: 0; }
+}
+@keyframes turnInPrev {
+  0%   { transform: perspective(1200px) rotateY(-90deg); opacity: 0; }
+  100% { transform: perspective(1200px) rotateY(0deg);   opacity: 1; }
+}
+.turn-out-next { animation: turnOutNext 0.4s ease-in  forwards; transform-origin: left center;  }
+.turn-in-next  { animation: turnInNext  0.4s ease-out forwards; transform-origin: right center; }
+.turn-out-prev { animation: turnOutPrev 0.4s ease-in  forwards; transform-origin: right center; }
+.turn-in-prev  { animation: turnInPrev  0.4s ease-out forwards; transform-origin: left center;  }
+
+/* Scrollbar estilizada dentro del modal de la carta */
+.custom-scrollbar::-webkit-scrollbar       { width: 8px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(44, 24, 16, 0.2); border-radius: 20px; }

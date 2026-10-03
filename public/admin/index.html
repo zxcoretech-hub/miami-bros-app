@@ -2,202 +2,393 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Miami Bro's</title>
-    <!-- Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Panel · Miami Bro's</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- Google Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="bg-background min-h-screen flex hidden" id="app-body">
-    
-    <!-- Sidebar -->
-    <aside class="w-64 bg-surface-container-lowest border-r border-surface-container flex flex-col hidden md:flex">
-        <div class="p-6 flex items-center gap-3 border-b border-surface-container">
-            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-md">
-                <img src="../assets/logo.png" alt="Logo" class="w-8 h-8 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'">
-            </div>
-            <h2 class="font-display-sm font-black text-xl text-on-surface">Admin</h2>
-        </div>
-        <nav class="flex-1 p-4 space-y-2">
-            <a href="#" class="flex items-center gap-3 bg-secondary-container text-on-secondary-container px-4 py-3 rounded-xl font-label-md font-bold transition-colors">
-                <span class="material-symbols-outlined">inventory_2</span>
-                Productos
-            </a>
-        </nav>
-        <div class="p-4 border-t border-surface-container">
-            <button id="logout-btn" class="w-full flex items-center justify-center gap-2 text-error hover:bg-error-container/50 px-4 py-3 rounded-xl font-label-md font-bold transition-colors">
-                <span class="material-symbols-outlined">logout</span>
-                Cerrar Sesión
-            </button>
-        </div>
+<body>
+  <div id="boot">
+    <div class="logo">MB</div>
+    <p id="bootMsg">Cargando panel…</p>
+  </div>
+
+  <div class="app" id="app-body" hidden>
+
+    <!-- Sidebar (PC) -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mascot"><div class="inner"><span class="ch">🍗</span><span class="mb">Miami</span></div><div class="flag">★</div></div>
+        <div><div class="tt">Miami Bro's</div><div class="ts">Panel admin</div></div>
+      </div>
+      <nav class="side-nav">
+        <button class="navbtn active" data-v="inicio" onclick="go('inicio')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>Inicio</button>
+        <button class="navbtn" data-v="menu" onclick="go('menu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v18M8 3v7a2 2 0 0 1-4 0M18 3c-1.7 0-3 2-3 5s1 4 3 4m0 0v9m0-9V3"/></svg>Menú</button>
+        <button class="navbtn" data-v="promos" onclick="go('promos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12.2V5a2 2 0 0 1 2-2h7.2a2 2 0 0 1 1.4.6l7 7a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.3" fill="currentColor"/></svg>Promociones</button>
+        <button class="navbtn" data-v="resenas" onclick="go('resenas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17.9 6.8 19.6l1-5.8L3.5 9.7l5.9-.9z"/></svg>Reseñas</button>
+        <button class="navbtn" data-v="negocio" onclick="go('negocio')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 20v-5h6v5"/></svg>Negocio</button>
+      </nav>
+      <div class="side-foot">
+        <button class="js-theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.4 6.4l-.7-.7M6.3 6.3l-.7-.7m12.1 0l-.7.7M6.3 17.7l-.7.7"/><circle cx="12" cy="12" r="4"/></svg>Cambiar tema</button>
+        <button class="js-logout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17l5-5-5-5M20 12H9M9 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3"/></svg>Cerrar sesión</button>
+      </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- Topbar Mobile -->
-        <header class="md:hidden bg-surface-container-lowest border-b border-surface-container p-4 flex justify-between items-center">
-            <h2 class="font-display-sm font-black text-xl text-on-surface">Miami Bro's</h2>
-            <button id="logout-btn-mobile" class="text-error">
-                <span class="material-symbols-outlined">logout</span>
-            </button>
-        </header>
-
-        <!-- Dashboard Content -->
-        <div class="flex-1 overflow-y-auto p-4 md:p-8">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h1 class="font-display-md text-3xl font-black text-on-surface">Gestión de Menú</h1>
-                    <p class="text-on-surface-variant font-body-md mt-1">Administra tus productos y precios en tiempo real.</p>
-                </div>
-                <button id="btn-add-product" class="bg-primary hover:bg-surface-tint text-white px-6 py-3 rounded-xl font-label-lg font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2">
-                    <span class="material-symbols-outlined">add</span>
-                    Nuevo Producto
-                </button>
-            </div>
-
-            <!-- Tabla de Productos -->
-            <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-surface-container-low text-on-surface-variant font-label-md uppercase tracking-wider border-b border-surface-container">
-                                <th class="p-4 font-bold">Producto</th>
-                                <th class="p-4 font-bold">Precio</th>
-                                <th class="p-4 font-bold">Insignia</th>
-                                <th class="p-4 font-bold">Estado</th>
-                                <th class="p-4 font-bold text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="products-table-body" class="divide-y divide-surface-container">
-                            <tr>
-                                <td colspan="5" class="p-8 text-center text-on-surface-variant">
-                                    <span class="material-symbols-outlined animate-spin text-3xl">refresh</span>
-                                    <p class="mt-2">Cargando productos...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="main-wrap">
+      <!-- Cinta superior (móvil) -->
+      <div class="ticker" aria-hidden="true">
+        <div class="track">
+          <span><span class="pa">PA</span> ¡YA ABRIMOS EN PANAMÁ!</span><span>•</span>
+          <span class="am">🇨🇴 AUTÉNTICO SABOR 100% COLOMBIANO</span><span>•</span>
+          <span>🍗 POLLO APANADO Y SABOR LEGENDARIO</span><span>•</span>
+          <span>⚡ DOMICILIOS &amp; SALÓN</span><span>•</span>
+          <span><span class="pa">PA</span> ¡YA ABRIMOS EN PANAMÁ!</span><span>•</span>
+          <span class="am">🇨🇴 AUTÉNTICO SABOR 100% COLOMBIANO</span><span>•</span>
+          <span>🍗 POLLO APANADO Y SABOR LEGENDARIO</span><span>•</span>
+          <span>⚡ DOMICILIOS &amp; SALÓN</span><span>•</span>
         </div>
-    </main>
+      </div>
 
-    <!-- Modal Form (Hidden by default) -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-        <!-- Backdrop -->
-        <div id="modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"></div>
-        
-        <!-- Modal Content -->
-        <div class="bg-surface-container-lowest rounded-3xl shadow-xl w-full max-w-2xl mx-4 relative z-10 max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b border-surface-container flex justify-between items-center sticky top-0 bg-surface-container-lowest z-20">
-                <h2 id="modal-title" class="font-display-sm text-2xl font-black text-on-surface">Nuevo Producto</h2>
-                <button id="btn-close-modal" class="text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined text-3xl">close</span>
-                </button>
-            </div>
-            
-            <form id="product-form" class="p-6 space-y-6">
-                <input type="hidden" id="prod-id">
-                <input type="hidden" id="prod-old-image">
-                <input type="hidden" id="prod-orden">
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Titulo -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Título del Producto</label>
-                        <input type="text" id="prod-titulo" required class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                    </div>
-
-                    <!-- Precio -->
-                    <div>
-                        <label class="block font-label-md text-on-surface-variant mb-2">Precio (USD)</label>
-                        <input type="number" step="0.01" id="prod-precio" required class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                    </div>
-
-                    <!-- Insignia -->
-                    <div>
-                        <label class="block font-label-md text-on-surface-variant mb-2">Insignia (Ej: NUEVO)</label>
-                        <input type="text" id="prod-insignia" class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                    </div>
-
-                    <!-- Insignia Color -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Color de Insignia</label>
-                        <select id="prod-insignia-color" class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                            <option value="bg-primary text-on-primary">Rojo (Primary)</option>
-                            <option value="bg-secondary-container text-on-secondary-container">Amarillo (Secondary)</option>
-                            <option value="bg-amber-400 text-on-secondary-container">Dorado Oscuro</option>
-                        </select>
-                    </div>
-
-                    <!-- Descripción -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Descripción</label>
-                        <textarea id="prod-descripcion" rows="3" required class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface resize-none"></textarea>
-                    </div>
-
-                    <!-- Mensaje WhatsApp -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Mensaje Base para WhatsApp</label>
-                        <input type="text" id="prod-wa" required class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                    </div>
-
-                    <!-- Enlace PedidosYa (Fase 7) -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Enlace PedidosYa (Opcional)</label>
-                        <input type="url" id="prod-pedidosya" class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface" placeholder="https://www.pedidosya.com/...">
-                    </div>
-
-                    <!-- Imagen -->
-                    <div class="col-span-full">
-                        <label class="block font-label-md text-on-surface-variant mb-2">Imagen del Producto</label>
-                        <input type="file" id="prod-imagen" accept="image/png, image/jpeg, image/webp" class="w-full bg-surface-container-low border border-surface-container rounded-xl px-4 py-3 outline-none focus:border-primary text-on-surface">
-                        <p class="text-xs text-on-surface-variant mt-1">Deja vacío si no deseas cambiar la imagen actual.</p>
-                        <img id="img-preview" src="" class="mt-4 h-32 rounded-lg object-cover hidden border border-surface-container">
-                    </div>
-
-                    <!-- Estado Activo -->
-                    <div class="col-span-full flex items-center gap-3">
-                        <input type="checkbox" id="prod-activo" class="w-5 h-5 text-primary border-surface-container rounded">
-                        <label class="font-label-md text-on-surface cursor-pointer" for="prod-activo">Producto Activo (Visible al público)</label>
-                    </div>
-                </div>
-
-                <div class="flex justify-end gap-4 pt-6 border-t border-surface-container">
-                    <button type="button" id="btn-cancel-modal" class="px-6 py-3 rounded-xl font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors">Cancelar</button>
-                    <button type="submit" id="btn-save-product" class="bg-primary hover:bg-surface-tint text-white px-8 py-3 rounded-xl font-bold shadow-md transition-transform transform hover:scale-105 flex items-center gap-2">
-                        <span class="material-symbols-outlined">save</span>
-                        Guardar
-                    </button>
-                </div>
-            </form>
+      <!-- Top bar (móvil) -->
+      <header class="topbar">
+        <div class="mascot"><div class="inner"><span class="ch">🍗</span><span class="mb">Miami</span></div><div class="flag">★</div></div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:6px"><span class="tt">Miami Bro's</span><span class="admin-pill">Admin</span></div>
+          <div class="ts" id="topsub">Panel del administrador</div>
         </div>
+        <span class="status-chip"><span class="dot"></span>En línea</span>
+        <button class="icon-btn js-theme" title="Cambiar tema" aria-label="Cambiar tema">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.4 6.4l-.7-.7M6.3 6.3l-.7-.7m12.1 0l-.7.7M6.3 17.7l-.7.7"/><circle cx="12" cy="12" r="4"/></svg>
+        </button>
+        <button class="icon-btn js-logout" title="Cerrar sesión" aria-label="Cerrar sesión">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17l5-5-5-5M20 12H9M9 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3"/></svg>
+        </button>
+      </header>
+
+      <!-- INICIO -->
+      <main class="content active" id="view-inicio">
+        <div class="hello-row">
+          <span class="hello"><span class="pa">PA</span> ¡Hola Admin! Sabor de Hermanos 🍗</span>
+          <span class="sazon">100% Sazón Criollo</span>
+        </div>
+        <h1 class="h-screen">¿Qué quieres hacer hoy?</h1>
+        <p class="sub">Todo lo que cambies aquí se actualiza al instante en la carta digital de <b>Miami Bro's Panamá</b>.</p>
+
+        <!-- Banner sitio web -->
+        <div class="web-card">
+          <div class="badge"><span class="e">🍗</span><span class="t">BRO'S</span></div>
+          <div class="wc-i">
+            <div class="tags"><span class="live">Web Online</span><span class="of">★ OFICIAL</span></div>
+            <h3>Ver sitio web en vivo</h3>
+            <p>Así lo ven tus clientes en Panamá</p>
+          </div>
+          <a class="go" href="https://miami-brooss.web.app" target="_blank" rel="noopener">Ver carta
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+          </a>
+        </div>
+
+        <!-- Métricas -->
+        <div class="metrics">
+          <div class="metric">
+            <div class="top"><span class="tag">Carta</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7a3 3 0 0 0 6 0V2M6 2v20M21 15V2a5 5 0 0 0-3 9v11"/></svg></div>
+            <div class="n" id="st-prod">—</div><div class="l">Platos &amp; combos</div>
+            <div class="bar"><i></i></div>
+          </div>
+          <div class="metric good">
+            <div class="top"><span class="tag">Activos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="n" id="st-vis">—</div><div class="l">Visibles en menú</div>
+            <div class="bar"><i></i></div>
+          </div>
+          <div class="metric gold">
+            <div class="top"><span class="tag">★ Reseñas</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17.9 6.8 19.6l1-5.8L3.5 9.7l5.9-.9z"/></svg></div>
+            <div class="n" id="st-res">—</div><div class="l">Opiniones web</div>
+            <div class="bar"><i></i></div>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <button class="wa-card" type="button" onclick="go('negocio')">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.1 7.6L3 21l1.9-5.9A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+          <div class="wi">
+            <div class="wt"><span class="b">Canal oficial</span><span class="on">ACTIVO</span></div>
+            <h4>Pedidos por WhatsApp</h4>
+            <p>Los pedidos llegan al <span class="num" id="home-wa">—</span></p>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+
+        <div class="section-label"><h3>Gestión del restaurante</h3></div>
+        <div class="qa-grid">
+          <button class="qa" onclick="openProd(null)">
+            <div class="ic tint-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div><div class="lab">Agregar producto</div><div class="desc">Un combo, alitas o burger nuevos</div></div>
+            <div class="more">Crear ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="qa" onclick="go('menu')">
+            <div class="ic tint-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div><div class="lab">Cambiar precios</div><div class="desc">Edita cualquier producto del menú</div></div>
+            <div class="more" style="color:var(--gold)">Editar menú <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="qa" onclick="openPromo(null)">
+            <div class="ic tint-good"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A3.5 3.5 0 0 0 12 11c0-2-1.5-3-1.5-5 0 0-3 1.5-3 5a3.5 3.5 0 0 0 1 3.5zM12 21a6 6 0 0 0 6-6c0-3-2-4.5-2.5-5.5-1 2-2 2.5-2 2.5s-.5-1 0-3c-3 2-7.5 4-7.5 9a6 6 0 0 0 6 3z"/></svg></div>
+            <div><div class="lab">Subir promoción</div><div class="desc">Banners y ofertas destacadas</div></div>
+            <div class="more" style="color:var(--wa-ink)">Publicar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="qa" onclick="go('negocio')">
+            <div class="ic tint-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="lab">Horarios y locales</div><div class="desc">WhatsApp, redes y sedes</div></div>
+            <div class="more" style="color:#1766c7">Configurar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+        </div>
+
+        <div class="section-label"><h3>Tu menú</h3>
+          <button onclick="go('menu')">Ver todo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="feed" id="homeRecent"></div>
+      </main>
+
+      <!-- MENÚ -->
+      <main class="content" id="view-menu">
+        <p class="eyebrow" style="font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin:0">Menú</p>
+        <h1 class="h-screen">Tus productos</h1>
+        <p class="sub">Toca un producto para editarlo, o agrega uno nuevo.</p>
+        <button class="btn btn-primary" onclick="openProd(null)" style="margin-bottom:16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar producto
+        </button>
+        <div class="section-label" style="margin-top:4px"><h3>Filtrar por categoría</h3>
+          <button onclick="openCats()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Categorías</button>
+        </div>
+        <div class="cat-scroll" id="catScroll"></div>
+        <div class="list" id="prodList"></div>
+      </main>
+
+      <!-- PROMOS -->
+      <main class="content" id="view-promos">
+        <p class="eyebrow" style="font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin:0">Promociones</p>
+        <h1 class="h-screen">Ofertas y novedades</h1>
+        <p class="sub">Las tarjetas de la sección de promociones de tu web.</p>
+        <button class="btn btn-primary" onclick="openPromo(null)" style="margin-bottom:16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Nueva promoción
+        </button>
+        <div class="list" id="promoList"></div>
+      </main>
+
+      <!-- RESEÑAS -->
+      <main class="content" id="view-resenas">
+        <p class="eyebrow" style="font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin:0">Reseñas</p>
+        <h1 class="h-screen">Lo que dicen tus clientes</h1>
+        <p class="sub">Testimonios que se muestran en la página principal.</p>
+        <button class="btn btn-primary" onclick="openRes(null)" style="margin-bottom:16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar reseña
+        </button>
+        <div class="list" id="resList"></div>
+      </main>
+
+      <!-- NEGOCIO -->
+      <main class="content" id="view-negocio">
+        <p class="eyebrow" style="font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--brand);margin:0">Mi negocio</p>
+        <h1 class="h-screen">Contacto y portada</h1>
+        <p class="sub">Los datos que aparecen en el encabezado, la portada y el pie de tu página.</p>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>
+          <span>Al tocar <b>Guardar</b>, estos datos cambian en toda tu web.</span>
+        </div>
+        <div class="field">
+          <label>Número de WhatsApp</label>
+          <input class="inp" id="conf-whatsapp" inputmode="tel" placeholder="Ej: 50769969944">
+          <p class="hint">A este número llegan los pedidos de todos los botones de WhatsApp.</p>
+        </div>
+        <div class="field">
+          <label>Instagram</label>
+          <input class="inp" id="conf-instagram" type="url" placeholder="https://instagram.com/miamibross">
+        </div>
+        <div class="field">
+          <label>Anuncio de la cinta roja (arriba del todo)</label>
+          <input class="inp" id="conf-banner" placeholder="Ej: 🇵🇦 ¡YA ABRIMOS EN PANAMÁ!">
+        </div>
+
+        <div class="section-label"><h3>Portada (inicio)</h3></div>
+        <div class="field">
+          <label>Título principal</label>
+          <input class="inp" id="conf-hero-title" placeholder="Ej: MIAMI BRO'S">
+        </div>
+        <div class="field">
+          <label>Subtítulo</label>
+          <input class="inp" id="conf-hero-subtitle" placeholder="Ej: Únete a la Resistencia del Sabor">
+        </div>
+        <div class="field">
+          <label>Imagen de fondo de la portada (enlace)</label>
+          <input class="inp" id="conf-hero-bg" type="url" placeholder="https://… enlace de la imagen (vacío = no cambiar)">
+          <div class="uploader" style="margin-top:10px">
+            <div class="ph" id="heroPh">🖼️</div>
+            <div style="flex:1;min-width:0"><div class="ptxt">Vista previa. Horizontal se ve mejor.</div></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="btn-save-config" style="margin-top:14px;max-width:620px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>
+          Guardar cambios
+        </button>
+
+        <div class="section-label"><h3>Locales</h3></div>
+        <div class="list" id="locList"></div>
+        <button class="btn btn-ghost" onclick="openLoc(null)" style="margin-top:12px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar local
+        </button>
+      </main>
     </div>
 
-    <!-- Auth Guard Script -->
-    <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/admin.js"></script>
-    <script>
-        // Reveal body on auth
-        import('../js/firebase.js').then((firebaseMod) => {
-            import('https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js').then((authMod) => {
-                authMod.onAuthStateChanged(firebaseMod.auth, (user) => {
-                    if (user) {
-                        document.getElementById('app-body').classList.remove('hidden');
-                    }
-                });
-            });
-        });
-        document.getElementById('logout-btn-mobile')?.addEventListener('click', () => {
-            document.getElementById('logout-btn')?.click();
-        });
-    </script>
+    <!-- Bottom nav (móvil) -->
+    <nav class="nav" id="nav">
+      <button class="navbtn active" data-v="inicio" onclick="go('inicio')"><span class="navic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg></span>Inicio</button>
+      <button class="navbtn" data-v="menu" onclick="go('menu')"><span class="navic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v18M8 3v7a2 2 0 0 1-4 0M18 3c-1.7 0-3 2-3 5s1 4 3 4m0 0v9m0-9V3"/></svg></span>Menú</button>
+      <button class="navbtn" data-v="promos" onclick="go('promos')"><span class="navic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12.2V5a2 2 0 0 1 2-2h7.2a2 2 0 0 1 1.4.6l7 7a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.3" fill="currentColor"/></svg></span>Promos</button>
+      <button class="navbtn" data-v="resenas" onclick="go('resenas')"><span class="navic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17.9 6.8 19.6l1-5.8L3.5 9.7l5.9-.9z"/></svg></span>Reseñas</button>
+      <button class="navbtn" data-v="negocio" onclick="go('negocio')"><span class="navic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 20v-5h6v5"/></svg></span>Negocio</button>
+    </nav>
+  </div>
+
+  <!-- PRODUCT SHEET -->
+  <div class="scrim" id="prodScrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="grab"></div>
+      <div class="sheet-head"><h2 id="prodTitle">Editar producto</h2>
+        <button class="x" onclick="closeSheet('prodScrim')" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="sheet-body">
+        <div class="live">
+          <div class="cap"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Así se verá en tu web</div>
+          <div class="pv-card">
+            <div class="pv-img" id="pvImg"><span id="pvEmoji">🍗</span><span class="pv-badge" id="pvBadge" hidden></span></div>
+            <div class="pv-body"><div class="pv-ttl" id="pvTtl">Nombre del producto</div><div class="pv-desc" id="pvDesc">Descripción…</div><div class="pv-price" id="pvPrice">$0.00</div></div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label>Foto del producto (enlace)</label>
+          <input class="inp" id="fFotoUrl" type="url" placeholder="https://… enlace de la imagen">
+          <p class="hint">Pega el enlace de una imagen pública (de PedidosYa, Instagram, etc.). Aparece arriba en la vista previa.</p>
+        </div>
+        <div class="field"><label>Nombre</label><input class="inp" id="fNombre" placeholder="Ej: Bro Clásico 4 Piezas"></div>
+        <div class="field"><label>Precio (USD)</label><input class="inp" id="fPrecio" type="number" step="0.01" inputmode="decimal" placeholder="6.50"></div>
+        <div class="field"><label>Categoría</label><select class="inp" id="fCat"></select><p class="hint" id="fCatHint" hidden>Aún no tienes categorías. Toca “Categorías” en el menú para crear una.</p></div>
+        <div class="field"><label>Descripción</label><textarea class="inp" id="fDesc" placeholder="Cuéntale al cliente qué incluye…"></textarea></div>
+        <div class="field">
+          <label>Etiqueta destacada <span style="font-weight:500;color:var(--muted)">(opcional)</span></label>
+          <input class="inp" id="fBadge" placeholder="Ej: MÁS VENDIDO">
+          <p class="hint">Color de la etiqueta:</p>
+          <div class="swatches" id="swatches"></div>
+        </div>
+        <div class="field"><label>Enlace de PedidosYa <span style="font-weight:500;color:var(--muted)">(opcional)</span></label><input class="inp" id="fPedidosya" type="url" placeholder="https://www.pedidosya.com/..."></div>
+        <div class="field"><div class="toggle"><div><div class="tlab">Mostrar en la web</div><div class="tsub">Si lo apagas, el cliente no lo verá</div></div><div class="sw on" id="fSw" role="switch" aria-checked="true" tabindex="0"></div></div></div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn btn-ghost" id="delProd" style="flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V7"/></svg></button>
+        <button class="btn btn-primary" style="flex:1" id="saveProd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>Guardar producto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMO SHEET -->
+  <div class="scrim" id="promoScrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="grab"></div>
+      <div class="sheet-head"><h2 id="promoTitle">Editar promoción</h2><button class="x" onclick="closeSheet('promoScrim')" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="sheet-body">
+        <div class="field"><label>Foto de la promoción (enlace)</label>
+          <input class="inp" id="pFotoUrl" type="url" placeholder="https://… enlace de la imagen">
+          <div class="uploader" style="margin-top:10px"><div class="ph" id="promoPh">📢</div>
+            <div style="flex:1;min-width:0"><div class="ptxt">Vista previa. Vertical se ve mejor en esta sección.</div></div>
+          </div>
+        </div>
+        <div class="field"><label>Título</label><input class="inp" id="pTitulo" placeholder="Ej: ¡Ya abrimos Panamá!"></div>
+        <div class="field"><label>Etiqueta corta</label><input class="inp" id="pEtiqueta" placeholder="Ej: Apertura Oficial"></div>
+        <div class="field"><label>Descripción</label><textarea class="inp" id="pDesc" placeholder="Describe la promoción…"></textarea></div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn btn-ghost" id="delPromo" style="flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V7"/></svg></button>
+        <button class="btn btn-primary" style="flex:1" id="savePromo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>Guardar promoción</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEÑA SHEET -->
+  <div class="scrim" id="resScrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="grab"></div>
+      <div class="sheet-head"><h2 id="resTitle">Editar reseña</h2><button class="x" onclick="closeSheet('resScrim')" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="sheet-body">
+        <div class="field"><label>Nombre del cliente</label><input class="inp" id="rNombre" placeholder="Ej: Carlos M."></div>
+        <div class="field"><label>Calificación</label><div class="stars" id="rStars"></div></div>
+        <div class="field"><label>Comentario</label><textarea class="inp" id="rComentario" placeholder="Lo que opinó el cliente…"></textarea></div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn btn-ghost" id="delRes" style="flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V7"/></svg></button>
+        <button class="btn btn-primary" style="flex:1" id="saveRes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>Guardar reseña</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCAL SHEET -->
+  <div class="scrim" id="locScrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="grab"></div>
+      <div class="sheet-head"><h2 id="locTitle">Editar local</h2><button class="x" onclick="closeSheet('locScrim')" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="sheet-body">
+        <div class="field"><label>Nombre del local</label><input class="inp" id="lNombre" placeholder="Ej: Miami Bro's — Vía España"></div>
+        <div class="field"><label>Dirección</label><input class="inp" id="lDir" placeholder="Calle y zona"></div>
+        <div class="field"><label>Horario</label><input class="inp" id="lHorario" placeholder="Ej: Lun a Dom: 12:00 PM - 11:00 PM"></div>
+        <div class="field"><label>Enlace de Google Maps <span style="font-weight:500;color:var(--muted)">(opcional)</span></label><input class="inp" id="lMapa" type="url" placeholder="https://maps.google.com/..."></div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn btn-ghost" id="delLoc" style="flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V7"/></svg></button>
+        <button class="btn btn-primary" style="flex:1" id="saveLoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>Guardar local</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORÍAS SHEET -->
+  <div class="scrim" id="catScrim">
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="grab"></div>
+      <div class="sheet-head"><h2>Categorías</h2><button class="x" onclick="closeSheet('catScrim')" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="sheet-body">
+        <p class="sub">Las secciones en las que se agrupa tu menú (Pollo Clásico, Combos, etc.). Usa las flechas para ordenarlas.</p>
+        <div class="list" id="catList" style="margin-bottom:16px"></div>
+        <div class="field" style="margin-bottom:8px"><label id="catFormLabel">Nueva categoría</label>
+          <input class="inp" id="catNombre" placeholder="Ej: Bebidas y Postres">
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-ghost" id="catCancel" style="flex:none" hidden>Cancelar</button>
+          <button class="btn btn-primary btn-block" id="catSave">Agregar categoría</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM -->
+  <div class="scrim" id="confirmScrim">
+    <div class="confirm" role="alertdialog" aria-modal="true">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V7"/></svg></div>
+      <h2 id="confirmTitle">¿Eliminar?</h2>
+      <p id="confirmText">Esta acción no se puede deshacer.</p>
+      <div class="acts">
+        <button class="btn btn-ghost" style="flex:1" onclick="closeSheet('confirmScrim')">Cancelar</button>
+        <button class="btn" style="flex:1;background:var(--danger);color:#fff" id="confirmOk">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg><span id="toastMsg"></span></div>
+
+  <!-- Auth guard + lógica + arranque -->
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/admin.js"></script>
+  <script type="module" src="../js/admin-boot.js"></script>
 </body>
 </html>

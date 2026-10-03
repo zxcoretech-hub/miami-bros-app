@@ -1,21 +1,51 @@
 import { auth } from './firebase.js';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
+// ===== Auto-cierre de sesión por inactividad (solo en el panel) =====
+const INACTIVITY_LIMIT_MS = 3 * 60 * 1000; // 3 minutos
+let inactivityTimer = null;
+let inactivityWired = false;
+
+function triggerInactivityLogout() {
+    // Marca el motivo ANTES de salir, por si la redirección pierde el query param.
+    try { sessionStorage.setItem('mb-logout-reason', 'inactividad'); } catch (e) {}
+    signOut(auth).finally(() => {
+        window.location.replace('login.html?reason=inactividad');
+    });
+}
+
+function startInactivityWatch() {
+    if (inactivityWired) return;
+    inactivityWired = true;
+    const reset = () => {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(triggerInactivityLogout, INACTIVITY_LIMIT_MS);
+    };
+    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click', 'wheel']
+        .forEach((ev) => window.addEventListener(ev, reset, { passive: true }));
+    reset(); // arranca el conteo
+}
+
 // Check authentication state across the app
 onAuthStateChanged(auth, (user) => {
-    const isLoginPage = window.location.pathname.includes('login.html');
-    const isAdminPage = window.location.pathname.includes('/admin/');
+    const path = window.location.pathname;
+    const isLoginPage = /login/i.test(path);
+    // Any page under /admin that isn't the login page is the protected dashboard.
+    // This covers both /admin/ (directory index) and /admin/index.html.
+    const isAdminDashboard = path.includes('/admin') && !isLoginPage;
 
     if (user) {
         // User is signed in.
         if (isLoginPage) {
-            // If they are on the login page but already signed in, redirect to dashboard
+            // Redirect to the admin dashboard
             window.location.href = 'index.html';
+        } else if (isAdminDashboard) {
+            // Inicia el vigilante de inactividad en el panel protegido.
+            startInactivityWatch();
         }
     } else {
         // User is signed out.
-        if (isAdminPage && !isLoginPage) {
-            // If they try to access admin panel without being signed in, kick them out
+        if (isAdminDashboard) {
             window.location.href = 'login.html';
         }
     }
@@ -23,6 +53,19 @@ onAuthStateChanged(auth, (user) => {
 
 // Setup Login Form Listener if we are on the login page
 document.addEventListener('DOMContentLoaded', () => {
+    // Aviso de cierre por inactividad en la pantalla de login
+    const noticeBox = document.getElementById('notice');
+    const noticeText = document.getElementById('notice-text');
+    if (noticeBox && noticeText) {
+        let reason = new URLSearchParams(window.location.search).get('reason');
+        if (!reason) { try { reason = sessionStorage.getItem('mb-logout-reason'); } catch (e) {} }
+        if (reason === 'inactividad') {
+            noticeText.textContent = 'Tu sesión se cerró por inactividad. Vuelve a ingresar.';
+            noticeBox.classList.remove('hidden');
+            try { sessionStorage.removeItem('mb-logout-reason'); } catch (e) {}
+        }
+    }
+
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
@@ -42,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 // Attempt Login
                 await signInWithEmailAndPassword(auth, email, password);
-                // The onAuthStateChanged listener will automatically redirect to index.html
+                // Redirigir de inmediato al panel (no depender solo de onAuthStateChanged)
+                window.location.replace('index.html');
+                return;
             } catch (error) {
                 // Handle Errors
                 console.error("Login failed:", error);
@@ -64,15 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Setup Logout Button if we are on the dashboard
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
+    // Setup Logout Buttons (sidebar on PC + topbar on mobile)
+    const logoutBtns = document.querySelectorAll('.js-logout, #logout-btn');
+    logoutBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
             signOut(auth).then(() => {
-                // Sign-out successful. onAuthStateChanged will handle redirect.
+                window.location.replace('login.html');
             }).catch((error) => {
                 console.error("Error signing out:", error);
             });
         });
-    }
+    });
 });

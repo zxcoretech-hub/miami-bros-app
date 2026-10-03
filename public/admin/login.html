@@ -11,9 +11,8 @@
     <!-- Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     
-    <!-- Tailwind CSS (CDN for development) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/tailwind-config.js"></script>
+    <!-- Tailwind compilado (producción) -->
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
 </head>
 <body class="bg-background min-h-screen flex items-center justify-center p-4">
 
@@ -25,7 +24,8 @@
             <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             <div class="relative z-10">
                 <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <img src="../assets/logo.png" alt="Miami Bro's Logo" class="w-16 h-16 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuASWMECjQIqJrFT2Vq84q-3CK07-AKJaTWFJFyaQaqiwB_rnZYDQijyulnOT32vdm5uYlka7463Pm_Ko_Ve4WcgOxpDLWA186NcufbE_VOwkVRaSFrCdek_r-WkvE4A1h92ZYsQ8JAmaKdHKoW56c11HBgqc2-iumDYiV1Ni_M6jd2c5sr9C7xm4bSNZEgkcUgWMXRAf0H7Rp76Bha6ePHd6mA75--1RrrlCT-WAH58HO0h3o5YNjogBxepvuC-P3Aedyg" alt="Miami Bro's Logo" class="w-16 h-16 object-cover rounded-full" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'">
+
                 </div>
                 <h1 class="font-display-md text-white font-black text-2xl tracking-tight">Miami Bro's Admin</h1>
                 <p class="text-primary-fixed mt-2 font-body-md">Ingresa tus credenciales para continuar</p>
@@ -34,6 +34,11 @@
 
         <!-- Form Section -->
         <div class="p-8">
+            <!-- Aviso (ej. cierre por inactividad) -->
+            <div id="notice" class="hidden bg-secondary-container text-on-secondary-container px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 mb-6">
+                <span class="material-symbols-outlined">schedule</span>
+                <span id="notice-text"></span>
+            </div>
             <form id="login-form" class="space-y-6">
                 <!-- Error Message Alert -->
                 <div id="error-message" class="hidden bg-error-container text-on-error-container px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2">

@@ -3,3 +3,7 @@ node_modules/
 .env
 firebase-debug.log
 .firebase/
+
+# Documentos internos (no van al repositorio)
+SEGURIDAD.md
+CORRECCIONES_PENDIENTES.md

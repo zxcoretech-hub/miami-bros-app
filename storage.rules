@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+
+      // Lectura pública: las imágenes del menú/portada deben verse en la web.
+      allow read: if true;
+
+      // Escritura (subir, reemplazar, borrar): solo usuarios autenticados.
+      //  - En subidas/reemplazos (request.resource != null) se exige imagen y < 5 MB.
+      //  - En borrados (request.resource == null) basta con estar autenticado.
+      allow write: if request.auth != null
+        && (
+             request.resource == null
+             || (
+                  request.resource.size < 5 * 1024 * 1024
+                  && request.resource.contentType.matches('image/.*')
+                )
+           );
+    }
+  }
+}

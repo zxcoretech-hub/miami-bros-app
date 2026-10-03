@@ -1,0 +1,6 @@
+/* Entrada del compilador de Tailwind.
+   Se compila a tailwind.css con:  npm run build:css
+   (Las animaciones de la carta y utilidades propias viven en styles.css) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
